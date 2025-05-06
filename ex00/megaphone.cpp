@@ -22,6 +22,9 @@ bool	str_toupper(char *str, bool end)
 		std::cout << std::endl;
 	return (true);
 }
+// --------------------------------------------------------------------
+// --------------   Legitimate use of <cctype>?   ---------------------
+// --------------------------------------------------------------------
 
 // Verification that ch is alpha and lower was made as std::toupper
 //   as std::toupper converts the given character to uppercase
@@ -29,7 +32,7 @@ bool	str_toupper(char *str, bool end)
 //   currently installed C locale.
 // Cast into unsigned char to prevent undefined behaviour.
 //    If the value of ch is not representable as unsigned
-//    char and does not equal EOF, the behavior is undefined. 
+//    char and does not equal EOF, the behavior is undefined.
 
 int	main(int argc, char **argv)
 {
