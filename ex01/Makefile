@@ -6,14 +6,14 @@
 #    By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2025/05/06 11:03:42 by tjorge-l         ###   ########.fr        #
+#    Updated: 2025/05/08 15:33:00 by tjorge-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = registry
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -std=c++98 -Wall -Wextra -Werror
 RM = rm -rf
 
 DEBUG_FLAGS = -g

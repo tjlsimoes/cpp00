@@ -6,14 +6,14 @@
 #    By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2025/04/29 19:01:56 by tjorge-l         ###   ########.fr        #
+#    Updated: 2025/05/08 15:32:40 by tjorge-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -std=c++98 -Wall -Wextra -Werror
 RM = rm -rf
 
 DEBUG_FLAGS = -g
