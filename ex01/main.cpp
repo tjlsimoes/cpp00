@@ -13,7 +13,9 @@ int	main(void)
 		std::cout << "EXIT: you know... to exit\n" << std::endl;
 		std::getline(std::cin, user_input);
 
-		if (std::cin.fail())
+		if (std::cin.eof())
+			break ;
+		else if (std::cin.fail())
 			std::cout << "Please enter a valid command" << std::endl;
 		else if (user_input.compare("ADD") == 0)
 		{

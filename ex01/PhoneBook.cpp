@@ -60,6 +60,8 @@ Contact	PhoneBook::create_contact(void)
 	return (add);
 }
 
+// Trim tabs somehow.
+
 void	PhoneBook::add_contact(void)
 {
 	Contact add;
@@ -107,25 +109,30 @@ bool	PhoneBook::display_contacts(void)
 		i++;
 	}
 	std::cout << std::left;
-	std::cout << std::endl;	// Needed?
+	std::cout << std::endl;
 	return (true);
 }
 
 void	PhoneBook::idx_prompt(void)
 {
-	int		i;
-	Contact	*contact;
+	std::string		i;
+	Contact			*contact;
+	int				i_nbr;
 
 	while (true)
 	{
 		std::cout << "Please specify contact index: [e.g. 0]\n";
-		std::cin >> i;
-		if (i < 0 || i > _added_contacts)
+		// std::cin >> i;
+		std::getline(std::cin, i);
+		if (std::cin.eof())
+			return ;
+		i_nbr = std::atoi(i.c_str()); 
+		if (i_nbr < 0 || i_nbr > _added_contacts)
 			std::cout << "Invalid index. Please try again.\n";
 		else
 			break;
 	}
-	contact = get_contact(i);
+	contact = get_contact(i_nbr);
 	std::cout
 		<< "\nFirst name: " << (*contact).get_first_name() << "\n"
 		<< "Last name: " << (*contact).get_last_name() << "\n"
