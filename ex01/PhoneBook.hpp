@@ -20,11 +20,11 @@ class PhoneBook
 		Contact	*get_contacts(void);
 		bool	display_contacts(void);
 		Contact	*get_contact(int idx);
-		void	user_input_error(void);
 		Contact	create_contact(void);
 		std::string	format_field(std::string str);
 		void	idx_prompt(void);
-		int		treat_input(std::string *name, bool phone);
+		void	treat_input(std::string *name);
+		int		invalid_phone(std::string *name);
 };
 
 #endif

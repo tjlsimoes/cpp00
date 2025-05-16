@@ -17,28 +17,22 @@ Contact *PhoneBook::get_contacts(void)
 	return (this->_contacts);
 }
 
-int	PhoneBook::treat_input(std::string *name, bool phone)
+int	PhoneBook::invalid_phone(std::string *name)
 {
-	if (name->empty())
+	if ((name->find_first_not_of("0123456789")) != std::string::npos)
 		return (1);
-	if (phone)
-	{
-		if ((name->find_first_not_of("0123456789")) != std::string::npos)
-			return (1);
-	}
+	return (0);
+}
+
+void	PhoneBook::treat_input(std::string *name)
+{
 	for (size_t i = 0; i < name->length(); ++i)
 	{
         if ((*name)[i] == '\t' || (*name)[i] == '\n' || (*name)[i] == '\v'
             || (*name)[i] == '\f' || (*name)[i] == '\r' || (*name)[i] == 24)
             (*name)[i] = ' ';
     }
-	return (0);
-}
-
-void	PhoneBook::user_input_error(void)
-{
-	std::cerr << "Invalid user input." << std::endl;
-	std::cerr << "Aborting contact creation." << std::endl;
+	return ;
 }
 
 Contact	PhoneBook::create_contact(void)
@@ -48,37 +42,55 @@ Contact	PhoneBook::create_contact(void)
 
 	std::cout << "\nPlease enter the first name: " << std::endl;
 	std::getline(std::cin, name);
-	if (PhoneBook::treat_input(&name, false))
-		return (PhoneBook::user_input_error(), add);
+	while (name.empty())
+	{
+		name.erase();
+		std::cerr << "Invalid user input. Try again." << std::endl;
+		std::getline(std::cin, name);
+	}
+	PhoneBook::treat_input(&name);
 	add.set_first_name(name);
 	name.erase();
 
 	std::cout << "Please enter the last name: " << std::endl;
 	std::getline(std::cin, name);
-	if (PhoneBook::treat_input(&name, false))
-		return (PhoneBook::user_input_error(), add);
+	while (name.empty())
+	{
+		name.erase();
+		std::cerr << "Invalid user input. Try again." << std::endl;
+		std::getline(std::cin, name);
+	}
+	PhoneBook::treat_input(&name);
 	add.set_last_name(name);
 	name.erase();
 	
 	std::cout << "Please enter the phone number: " << std::endl;
 	std::getline(std::cin, name);
-	if (PhoneBook::treat_input(&name, true))
-		return (PhoneBook::user_input_error(), add);
+	while (name.empty() || PhoneBook::invalid_phone(&name))
+	{
+		name.erase();
+		std::cerr << "Invalid user input. Try again." << std::endl;
+		std::getline(std::cin, name);
+	}
+	PhoneBook::treat_input(&name);
 	add.set_phone(name);
 	name.erase();
 
 	std::cout << "Please enter the secret: " << std::endl;
 	std::getline(std::cin, name);
-	if (PhoneBook::treat_input(&name, false))
-		return (PhoneBook::user_input_error(), add);
+	while (name.empty())
+	{
+		name.erase();
+		std::cerr << "Invalid user input. Try again." << std::endl;
+		std::getline(std::cin, name);
+	}
+	PhoneBook::treat_input(&name);
 	add.set_secret(name);
 	name.erase();
 
-	std::cout << '\n';
+	std::cout << std::endl;
 	return (add);
 }
-
-// Need to delete contact where it errors out.
 
 void	PhoneBook::add_contact(void)
 {
