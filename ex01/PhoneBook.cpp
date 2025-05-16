@@ -17,10 +17,28 @@ Contact *PhoneBook::get_contacts(void)
 	return (this->_contacts);
 }
 
+int	PhoneBook::treat_input(std::string *name, bool phone)
+{
+	if (name->empty())
+		return (1);
+	if (phone)
+	{
+		if ((name->find_first_not_of("0123456789")) != std::string::npos)
+			return (1);
+	}
+	for (size_t i = 0; i < name->length(); ++i)
+	{
+        if ((*name)[i] == '\t' || (*name)[i] == '\n' || (*name)[i] == '\v'
+            || (*name)[i] == '\f' || (*name)[i] == '\r' || (*name)[i] == 24)
+            (*name)[i] = ' ';
+    }
+	return (0);
+}
+
 void	PhoneBook::user_input_error(void)
 {
-	std::cout << "Invalid user input." << std::endl;
-	std::cout << "Aborting contact creation." << std::endl;
+	std::cerr << "Invalid user input." << std::endl;
+	std::cerr << "Aborting contact creation." << std::endl;
 }
 
 Contact	PhoneBook::create_contact(void)
@@ -30,28 +48,28 @@ Contact	PhoneBook::create_contact(void)
 
 	std::cout << "\nPlease enter the first name: " << std::endl;
 	std::getline(std::cin, name);
-	if (name.empty())
+	if (PhoneBook::treat_input(&name, false))
 		return (PhoneBook::user_input_error(), add);
 	add.set_first_name(name);
 	name.erase();
 
 	std::cout << "Please enter the last name: " << std::endl;
 	std::getline(std::cin, name);
-	if (name.empty())
+	if (PhoneBook::treat_input(&name, false))
 		return (PhoneBook::user_input_error(), add);
 	add.set_last_name(name);
 	name.erase();
 	
 	std::cout << "Please enter the phone number: " << std::endl;
 	std::getline(std::cin, name);
-	if (name.empty())
+	if (PhoneBook::treat_input(&name, true))
 		return (PhoneBook::user_input_error(), add);
 	add.set_phone(name);
 	name.erase();
 
 	std::cout << "Please enter the secret: " << std::endl;
 	std::getline(std::cin, name);
-	if (name.empty())
+	if (PhoneBook::treat_input(&name, false))
 		return (PhoneBook::user_input_error(), add);
 	add.set_secret(name);
 	name.erase();
@@ -60,7 +78,7 @@ Contact	PhoneBook::create_contact(void)
 	return (add);
 }
 
-// Trim tabs somehow.
+// Need to delete contact where it errors out.
 
 void	PhoneBook::add_contact(void)
 {

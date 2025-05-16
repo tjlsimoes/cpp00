@@ -24,6 +24,7 @@ class PhoneBook
 		Contact	create_contact(void);
 		std::string	format_field(std::string str);
 		void	idx_prompt(void);
+		int		treat_input(std::string *name, bool phone);
 };
 
 #endif
