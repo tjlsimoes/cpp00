@@ -4,27 +4,22 @@
 bool	str_toupper(char *str, bool end)
 {
 	int				i;
-	unsigned char	ch;
 
 	if (!str)
 		return (false);
 	i = 0;
 	while (str[i])
 	{
-		ch = static_cast<unsigned char>(str[i]);
-		if (std::isalpha(ch) && std::islower(ch))
-			std::cout << static_cast<unsigned char>(std::toupper(ch));
+		if (std::isalpha(str[i]) && std::islower(str[i]))
+			std::cout << static_cast<unsigned char>(std::toupper(str[i]));
 		else
-			std::cout << ch;
+			std::cout << static_cast<unsigned char>(str[i]);
 		i++;
 	}
 	if (end)
 		std::cout << std::endl;
 	return (true);
 }
-// --------------------------------------------------------------------
-// --------------   Legitimate use of <cctype>?   ---------------------
-// --------------------------------------------------------------------
 
 // Verification that ch is alpha and lower was made as std::toupper
 //   as std::toupper converts the given character to uppercase
