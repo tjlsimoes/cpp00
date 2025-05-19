@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+         #
+#    By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2025/05/08 15:33:00 by tjorge-l         ###   ########.fr        #
+#    Updated: 2025/05/19 10:10:33 by tjorge-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RM = rm -rf
 DEBUG_FLAGS = -g
 VFLAGS = -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes
 
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = main.cpp Contact.cpp PhoneBook.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 

@@ -35,6 +35,21 @@ void	PhoneBook::treat_input(std::string *name)
 	return ;
 }
 
+bool	PhoneBook::get_user_input(std::string *name)
+{
+	if (!name || std::cin.eof())
+		return (false);
+	while (name->empty())
+	{
+		if (std::cin.eof())
+			return (false);
+		name->erase();
+		std::cerr << "Invalid user input. Try again." << std::endl;
+		std::getline(std::cin, *name);
+	}
+	return (true);
+}
+
 Contact	PhoneBook::create_contact(void)
 {
 	Contact		add;
@@ -42,24 +57,17 @@ Contact	PhoneBook::create_contact(void)
 
 	std::cout << "\nPlease enter the first name: " << std::endl;
 	std::getline(std::cin, name);
-	while (name.empty())
-	{
-		name.erase();
-		std::cerr << "Invalid user input. Try again." << std::endl;
-		std::getline(std::cin, name);
-	}
+	if (!PhoneBook::get_user_input(&name))
+		return (add);
 	PhoneBook::treat_input(&name);
 	add.set_first_name(name);
 	name.erase();
 
 	std::cout << "Please enter the last name: " << std::endl;
 	std::getline(std::cin, name);
-	while (name.empty())
-	{
-		name.erase();
-		std::cerr << "Invalid user input. Try again." << std::endl;
-		std::getline(std::cin, name);
-	}
+	PhoneBook::get_user_input(&name);
+	if (!PhoneBook::get_user_input(&name))
+		return (add);
 	PhoneBook::treat_input(&name);
 	add.set_last_name(name);
 	name.erase();
@@ -68,6 +76,8 @@ Contact	PhoneBook::create_contact(void)
 	std::getline(std::cin, name);
 	while (name.empty() || PhoneBook::invalid_phone(&name))
 	{
+		if (std::cin.eof())
+			return (add);
 		name.erase();
 		std::cerr << "Invalid user input. Try again." << std::endl;
 		std::getline(std::cin, name);
@@ -78,12 +88,8 @@ Contact	PhoneBook::create_contact(void)
 
 	std::cout << "Please enter the secret: " << std::endl;
 	std::getline(std::cin, name);
-	while (name.empty())
-	{
-		name.erase();
-		std::cerr << "Invalid user input. Try again." << std::endl;
-		std::getline(std::cin, name);
-	}
+	if (!PhoneBook::get_user_input(&name))
+		return (add);
 	PhoneBook::treat_input(&name);
 	add.set_secret(name);
 	name.erase();
@@ -97,7 +103,8 @@ void	PhoneBook::add_contact(void)
 	Contact add;
 
 	add = PhoneBook::create_contact();
-	// Need to check for user input error?
+	if (std::cin.eof())
+		return ;
 	PhoneBook::_added_contacts += 1;
 	if (PhoneBook::_added_contacts == 8)
 		PhoneBook::_added_contacts = 0;
@@ -179,8 +186,3 @@ Contact *PhoneBook::get_contact(int idx)
 }
 
 int	PhoneBook::_added_contacts = -1;
-
-
-// --------------------------------------------------------------------
-// --------------   std::endl? Not '\n\ instead?   --------------------
-// --------------------------------------------------------------------

@@ -34,9 +34,5 @@ int	main(void)
 	return (0);
 }
 
-// --------------------------------------------------------------------
-// --------------   Legitimate use of std::cin   ----------------------
-// --------------------------------------------------------------------
-
 // std::getline() was used as std::cin alone would, for example,
 //   take "ADD" "IO" as two different inputs.

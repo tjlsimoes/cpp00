@@ -25,8 +25,7 @@ class PhoneBook
 		void	idx_prompt(void);
 		void	treat_input(std::string *name);
 		int		invalid_phone(std::string *name);
+		bool	get_user_input(std::string *name);
 };
 
 #endif
-
-// Need to review public and private methods' assignment.
